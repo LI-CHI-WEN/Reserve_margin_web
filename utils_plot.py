@@ -7,7 +7,7 @@ def plot_supply_scatter(year, df_plot, df_demand):
     df_plot["成本_萬元"] = df_plot[f"{year}容量成本"] / 10000
     df_plot["累積容量"] = df_plot["容量累積"]
 
-    # 去除極端成本（上位 99.5% 以上）
+    # 去除極端成本（PR 99.5 以上）
     cost_threshold = df_plot["成本_萬元"].quantile(0.995)
     df_plot = df_plot[df_plot["成本_萬元"] <= cost_threshold]
 
@@ -27,7 +27,7 @@ def plot_supply_scatter(year, df_plot, df_demand):
     fig = make_subplots(rows=2, cols=1, shared_xaxes=False, subplot_titles=("供給曲線（總圖）", "交點放大圖"))
 
     # 主圖
-    fig.add_trace(go.Scatter(x=x_vals, y=y_vals, mode="lines", name="供給階梯", line=dict(color="blue")), row=1, col=1)
+    fig.add_trace(go.Scatter(x=x_vals, y=y_vals, mode="lines", name="", line=dict(color="blue")), row=1, col=1)  # 階梯上的點
     fig.add_trace(go.Scatter(x=df_plot["累積容量"], y=df_plot["成本_萬元"], mode="markers", text=df_plot["hover"],
                              hoverinfo="text", marker=dict(size=5, color="blue"), name="資料點"), row=1, col=1)
     fig.add_vline(x=df_demand, line_dash="dash", line_color="red", row=1, col=1)
@@ -51,7 +51,7 @@ def plot_supply_scatter(year, df_plot, df_demand):
     y_max = y_cross + 150
 
     # 放大圖
-    fig.add_trace(go.Scatter(x=x_vals, y=y_vals, mode="lines", name="供給階梯", line=dict(color="blue")), row=2, col=1)
+    fig.add_trace(go.Scatter(x=x_vals, y=y_vals, mode="lines", name="", line=dict(color="blue")), row=2, col=1)  #階梯上的點
     fig.add_trace(go.Scatter(x=df_plot["累積容量"], y=df_plot["成本_萬元"], mode="markers", text=df_plot["hover"],
                              hoverinfo="text", marker=dict(size=5, color="blue"), name="資料點"), row=2, col=1)
     fig.add_vline(x=df_demand, line_dash="dash", line_color="red", row=2, col=1)

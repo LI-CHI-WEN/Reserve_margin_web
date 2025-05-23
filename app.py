@@ -25,7 +25,7 @@ if uploaded_file:
     else:
         df_main, df_platform = apply_total_supply(df_main, df_platform)
 
-    exclusion = st.selectbox("📌 排除來源（可選）", [
+    exclusion = st.multiselect("📌 排除來源（可複選）", [
         "不排除", "平台全部", "平台儲能", "平台汽電", "平台需量", "汽電+需量", "民間義務者"
     ])
     if exclusion != "不排除":
@@ -37,7 +37,15 @@ if uploaded_file:
             "汽電+需量": exclude_platform_cogen_demand,
             "民間義務者": exclude_private_commitments,
         }
-        df_main, df_platform = exclude_funcs[exclusion](year, df_main, df_platform)
+    for name in exclusion:
+        df_main, df_platform = exclude_funcs[name](year, df_main, df_platform)
+    
+    if exclusion:
+        st.success("✔ 已套用排除： " + "、".join(exclusion))
+    else:
+        st.info("尚未排除任何來源")
+        
+        #df_main, df_platform = exclude_funcs[exclusion](year, df_main, df_platform)
 
     demand_mode = st.radio("3️⃣ 選擇需求模式", ["台電需求", "全國需求"])
     if st.button("📈 畫供給曲線"):
