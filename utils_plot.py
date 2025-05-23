@@ -76,7 +76,7 @@ def plot_supply_scatter(year, df_plot, df_demand):
 
     fig.update_layout(
         height=800,
-        title_text="📈 電力供給曲線（含需求交點放大區）",
+        title_text="📈 電力供給曲線",
         hovermode="closest",
         showlegend=False
     )

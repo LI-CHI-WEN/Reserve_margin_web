@@ -54,6 +54,6 @@ if uploaded_file:
         fig = plot_supply_scatter(year, df_main_sorted, demand_val)
         st.plotly_chart(fig, use_container_width=True)
 
-        with st.expander("📋 檢視處理後資料（前500筆）"):
+        with st.expander("📋 檢視處理後資料"):
             st.dataframe(df_main_sorted.head(500))
 
