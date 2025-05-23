@@ -26,24 +26,23 @@ if uploaded_file:
         df_main, df_platform = apply_total_supply(df_main, df_platform)
 
     exclusion = st.multiselect("📌 排除來源（可複選）", [
-        "不排除", "平台全部", "平台儲能", "平台汽電", "平台需量", "汽電+需量", "民間義務者"
+        "平台全部", "平台儲能", "平台汽電", "平台需量", "汽電+需量", "民間義務者"
     ])
-    if exclusion != "不排除":
-        exclude_funcs = {
-            "平台全部": exclude_platform_all,
-            "平台儲能": exclude_platform_storage,
-            "平台汽電": exclude_platform_cogen,
-            "平台需量": exclude_platform_demand,
-            "汽電+需量": exclude_platform_cogen_demand,
-            "民間義務者": exclude_private_commitments,
-        }
+    exclude_funcs = {
+        "平台全部": exclude_platform_all,
+        "平台儲能": exclude_platform_storage,
+        "平台汽電": exclude_platform_cogen,
+        "平台需量": exclude_platform_demand,
+        "汽電+需量": exclude_platform_cogen_demand,
+        "民間義務者": exclude_private_commitments,
+    }
     for name in exclusion:
         df_main, df_platform = exclude_funcs[name](year, df_main, df_platform)
     
     if exclusion:
         st.success("✔ 已套用排除： " + "、".join(exclusion))
     else:
-        st.info("尚未排除任何來源")
+        st.info("未排除任何來源")
         
         #df_main, df_platform = exclude_funcs[exclusion](year, df_main, df_platform)
 
