@@ -56,12 +56,18 @@ def plot_supply_scatter(year, df_plot, df_demand):
                              hoverinfo="text", marker=dict(size=5, color="blue"), name="資料點"), row=2, col=1)
     fig.add_vline(x=df_demand, line_dash="dash", line_color="red", row=2, col=1)
 
-    # 標註交點
+    cross_hover_text = f"容量: {df_demand:.0f} MW<br>價格: {y_cross:.2f} 萬元<br>機組: {site + num}"
+    
     fig.add_trace(go.Scatter(
-        x=[df_demand], y=[y_cross], mode="markers+text",
-        text=["🔺"], textposition="top center",
+        x=[df_demand],
+        y=[y_cross],
+        mode="markers+text",
         marker=dict(size=10, color="red"),
-        hoverinfo="skip", showlegend=False
+        text=["🔺"],
+        textposition="top center",
+        hoverinfo="text",
+        hovertext=[cross_hover_text],
+        showlegend=False
     ), row=2, col=1)
 
     fig.update_xaxes(title_text="累積容量 (MW)", row=2, col=1, range=[x_min, x_max])
