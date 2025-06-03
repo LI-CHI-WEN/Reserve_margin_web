@@ -1,0 +1,13 @@
+name: Keep Streamlit App Alive
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"  # 每 10 分鐘執行一次
+  workflow_dispatch:         # 允許手動觸發
+
+jobs:
+  ping_app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Streamlit App
+        run: curl -s https://reservemarginweb-y39du43bpf2duyqhq2jf4a.streamlit.app/
