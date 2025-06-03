@@ -200,8 +200,8 @@ def plot_supply_scatter(year, df_plot, df_demand=None, fig=None, ax=None, scatte
     for i in range(len(x) - 1):
         if x[i] <= x_cross < x[i + 1]:
             y_cross = y[i]
-            site = df_plot["電廠"].iloc[i]
-            num = df_plot["機組"].iloc[i]
+            site = df_plot["電廠"].iloc[i+1]
+            num = df_plot["機組"].iloc[i+1]
             site = "" if pd.isna(site) else str(site)  # 如果有nan要轉成字串
             num = "" if pd.isna(num) else str(num)
 

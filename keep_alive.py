@@ -11,4 +11,3 @@ while True:
     except Exception as e:
         print(f"Failed to ping: {e}")
     time.sleep(600)  # 每10分鐘 ping 一次
-    
