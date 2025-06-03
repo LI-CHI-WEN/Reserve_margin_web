@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from read_data import *
 from utils_plot import plot_supply_scatter
 import re
+from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(layout="wide")
 
@@ -57,3 +58,4 @@ if uploaded_file:
         with st.expander("📋 檢視處理後資料"):
             st.dataframe(df_main_sorted.head(500))
 
+st_autorefresh(interval=9 * 60 * 1000, key="refresh")
