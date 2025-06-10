@@ -17,8 +17,8 @@ def plot_supply_scatter(year, df_plot, df_demand):
     def get_step_xy(df):
         x_vals, y_vals = [], []
         for i in range(len(df) - 1):
-            x_vals += [df["累積容量"].iloc[i], df["累積容量"].iloc[i + 1]]
-            y_vals += [df["成本_萬元"].iloc[i], df["成本_萬元"].iloc[i + 1]]
+            x_vals += [df["累積容量"].iloc[i+1], df["累積容量"].iloc[i]]
+            y_vals += [df["成本_萬元"].iloc[i], df["成本_萬元"].iloc[i]]
         return x_vals, y_vals
 
     x_vals, y_vals = get_step_xy(df_plot)
