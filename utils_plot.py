@@ -35,7 +35,7 @@ def plot_supply_scatter(year, df_plot, df_demand):
     # 找交點
     for i in range(len(df_plot) - 1):
         if df_plot["累積容量"].iloc[i] <= df_demand < df_plot["累積容量"].iloc[i + 1]:
-            y_cross = df_plot["成本_萬元"].iloc[i]
+            y_cross = df_plot["成本_萬元"].iloc[i+1]
             site = str(df_plot["電廠"].iloc[i+1] or "")
             num = str(df_plot["機組"].iloc[i+1] or "")
             label = f"需求交點<br>容量: {df_demand:.0f} MW<br>價格: {y_cross:.2f} 萬元<br>機組: {site + num}"
